@@ -242,6 +242,11 @@ public:
             }
         }
 
+        if (mirror) {
+            std::swap(t[0], t[1]);
+            std::swap(t[2], t[3]);
+        }
+
         memcpy(verts, v, 4*2*4);
         memcpy(tex, t.data(), 4*2*4);
 
