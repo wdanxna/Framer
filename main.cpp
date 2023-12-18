@@ -137,8 +137,8 @@ int main() {
     assert(GL_NO_ERROR == glGetError());
 
     //load image into texture
-    // GLuint texture = image2Texture("tifa-540x960.jpg");
-    GLuint texture = image2Texture("ada-1920x1080.jpg");
+    GLuint texture = image2Texture("tifa-540x960.jpg");
+    // GLuint texture = image2Texture("ada-1920x1080.jpg");
     if (texture == -1) {
         glfwTerminate();
         return -1;
@@ -146,11 +146,11 @@ int main() {
     //setup vertex data
     using namespace WDFramer;
     Framer framer(
-        // {540, 960},
-        {1920, 1080},
+        {540, 960},
+        // {1920, 1080},
         {window_width, window_height}, 
         Framer::origin_t::bottom_left, 
-        Framer::mode_t::aspectFill
+        Framer::mode_t::aspectFit
     );
     float vertices[8], texcoord[8];
     framer.gl_fullscreen_quad(vertices, texcoord, Framer::rot_t::cw_180, true);
