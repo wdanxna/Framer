@@ -215,6 +215,39 @@ public:
         return v[0];
     }
 
+    void gl_dynamic_quad(float verts[8], float tex[8], rot_t rot=rot_t::none, bool mirror=false) {
+        //order: top-left, top-right, bottom-left, bottom-right
+        float t[] = {
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            0.0f, 0.0f,
+            1.0f, 0.0f
+        };
+        std::vector<vec2_t> v = {
+            {0.0f, ps.h},
+            {ps.w, ps.h},
+            {0.0f, 0.0f},
+            {ps.w, 0.0f}
+        };
+
+        transformPointsFrom(system_t::picture, system_t::frame, v, norm_t::NDC);
+
+        if (rot != rot_t::none) {
+            auto rot_trans = rotation(rot);
+            for (auto& p : v) {
+                p = p.apply(rot_trans);
+            }
+        }
+
+        if (mirror) {
+            std::swap(v[0], v[1]);
+            std::swap(v[2], v[3]);
+        }
+
+        memcpy(verts, v.data(), 4*2*4);
+        memcpy(tex, t, 4*2*4);
+    }
+
     void gl_fullscreen_quad(float verts[8], float tex[8], rot_t rot=rot_t::none, bool mirror=false) {
         //order: top-left, top-right, bottom-left, bottom-right
         float v[] = {

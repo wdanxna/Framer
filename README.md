@@ -32,4 +32,8 @@ auto q = framer.frame2Pic(pic_point);
 //coordinates will be adjusted.
 float verts[8], tex[8];
 framer.gl_fullscreen_quad(verts, tex);
+
+//the texture coordinate will fill the entire quad
+//the vertices will be adjust accordingly.
+framer.gl_dynamic_quad(verts, tex);
 ```
